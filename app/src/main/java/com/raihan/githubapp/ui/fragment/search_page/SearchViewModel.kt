@@ -16,18 +16,17 @@ class SearchViewModel : ViewModel() {
         const val TAG = "SearchVM"
     }
 
-    private var _users = MutableLiveData<List<UserItems>>()
-    private val users: LiveData<List<UserItems>> get() = _users
+    private var _searchedUsers = MutableLiveData<Users>()
+    val searchedUsers: LiveData<Users> get() = _searchedUsers
 
-    private var _userResults = MutableLiveData<Users>()
-    private val userResult: LiveData<Users> get() = _userResults
-
+    // [[ TODO: can be wrapped into one function, separation from specific and all is just using
+    // the name parameter ]]
     fun getUser(name: String) {
         viewModelScope.launch {
             try {
-                val users = ApiConfig.getGithubService().searchUser(name)
-                _userResults.value = users
-                Log.d(TAG, "getUser: ${userResult.value}")
+                val result = ApiConfig.getGithubService().searchUser(name)
+                _searchedUsers.value = result
+                Log.d(TAG, "getUser: ${result.items}")
             } catch (e: HttpException) {
                 val response = (e as? HttpException)?.response()?.body()
                 Log.e(TAG, "Error fetching users: $e", e)
@@ -36,16 +35,8 @@ class SearchViewModel : ViewModel() {
         }
     }
 
-    fun getAllUser() {
-        viewModelScope.launch {
-            try {
-                val users = ApiConfig.getGithubService().getAllUsers()
-                _users.value = users
-                Log.d(TAG, "getUser: ${userResult.value}")
-            } catch (e: Exception) {
-                Log.d(TAG, "$e")
-            }
-        }
+    init {
+        getUser("raihanadf")
     }
 
 }
