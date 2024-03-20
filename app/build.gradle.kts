@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -43,11 +42,14 @@ android {
 
 dependencies {
     // required for this project
-    implementation(libs.retrofit) // [[ retrofit ]]
+    implementation(libs.retrofit) // [[ network: retrofit ]]
+    implementation(libs.moshi.kotlin) // [[ network: moshi ]]
+    implementation(libs.converter.moshi) // [[ network: moshi converter ]]
+    implementation(libs.coil) // [[ network: coil ]]
     implementation(libs.androidx.lifecycle.livedata.ktx) // [[ lifecycle: livedata ]]
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // [[ lifecycle: viewmodel ]]
     implementation(libs.androidx.navigation.fragment.ktx) // [[ navigation ]]
-    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.ui.ktx) // [[ navigation ]]
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

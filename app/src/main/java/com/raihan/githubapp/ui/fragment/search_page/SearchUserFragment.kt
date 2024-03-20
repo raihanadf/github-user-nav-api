@@ -1,17 +1,19 @@
-package com.raihan.githubapp.ui.fragment
+package com.raihan.githubapp.ui.fragment.search_page
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import com.raihan.githubapp.databinding.FragmentSearchUserBinding
 
 class SearchUserFragment : Fragment() {
 
     private var _b: FragmentSearchUserBinding? = null
     private val b get() = _b!!
+
+    private val searchViewModel by viewModels<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,11 +25,9 @@ class SearchUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // [[ Test: to detail if works ]]
-        b.btnDetail.setOnClickListener {
-            val toDetailUser = SearchUserFragmentDirections.actionSearchUserFragmentToDetailUserFragment()
-            findNavController().navigate(toDetailUser)
-        }
+
+        searchViewModel.getUser("raihanadf")
+
     }
 
     override fun onDestroy() {
