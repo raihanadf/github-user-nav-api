@@ -16,8 +16,8 @@ class SearchViewModel : ViewModel() {
         const val TAG = "SearchVM"
     }
 
-    private var _searchedUsers = MutableLiveData<Users>()
-    val searchedUsers: LiveData<Users> get() = _searchedUsers
+    private var _searchedUsers = MutableLiveData<List<UserItems?>?>()
+    val searchedUsers: LiveData<List<UserItems?>?> get() = _searchedUsers
 
     // [[ TODO: can be wrapped into one function, separation from specific and all is just using
     // the name parameter ]]
@@ -25,7 +25,7 @@ class SearchViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = ApiConfig.getGithubService().searchUser(name)
-                _searchedUsers.value = result
+                _searchedUsers.value = result.items
                 Log.d(TAG, "getUser: ${result.items}")
             } catch (e: HttpException) {
                 val response = (e as? HttpException)?.response()?.body()

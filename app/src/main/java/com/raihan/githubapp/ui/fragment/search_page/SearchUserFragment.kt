@@ -34,11 +34,8 @@ class SearchUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        b.appbarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(context)
-
         searchViewModel.searchedUsers.observe(viewLifecycleOwner) {
-            setUsersData(it.items)
+            setUsersData(it)
         }
     }
 
