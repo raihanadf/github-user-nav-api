@@ -1,6 +1,8 @@
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -15,6 +17,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -36,6 +42,12 @@ android {
 }
 
 dependencies {
+    // required for this project
+    implementation(libs.retrofit) // [[ retrofit ]]
+    implementation(libs.androidx.lifecycle.livedata.ktx) // [[ lifecycle: livedata ]]
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // [[ lifecycle: viewmodel ]]
+    implementation(libs.androidx.navigation.fragment.ktx) // [[ navigation ]]
+    implementation(libs.androidx.navigation.ui.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
