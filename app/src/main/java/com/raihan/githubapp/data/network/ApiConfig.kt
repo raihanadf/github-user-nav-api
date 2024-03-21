@@ -9,15 +9,16 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 const val BASE_URL = "https://api.github.com/"
 
 class ApiConfig {
-  companion object {
-    fun getGithubService(): ApiGithubService {
-      val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-      val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .build()
+	companion object {
+		fun getGithubService(): ApiGithubService {
+//			val client = OkHttpClient.Builder().addInterceptor()
+			val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+			val retrofit = Retrofit.Builder()
+				.baseUrl(BASE_URL)
+				.addConverterFactory(MoshiConverterFactory.create(moshi))
+				.build()
 
-      return retrofit.create(ApiGithubService::class.java)
-    }
-  }
+			return retrofit.create(ApiGithubService::class.java)
+		}
+	}
 }
