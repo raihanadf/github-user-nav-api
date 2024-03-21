@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.raihan.githubapp.R
@@ -38,6 +40,30 @@ class SearchUserFragment : Fragment() {
 			// [[ Search bar and view thingy ]]
 			searchBar.inflateMenu(R.menu.menu_action)
 			searchView.setupWithSearchBar(searchBar)
+			searchBar.setOnMenuItemClickListener({ item ->
+				when (item.itemId) {
+
+					R.id.action_favorite -> {
+						Toast.makeText(
+							requireActivity(), "Not Implemented Yet", Toast
+								.LENGTH_SHORT
+						).show()
+						true
+					}
+
+					R.id.action_settings -> {
+						val navigation =
+							SearchUserFragmentDirections.actionSearchUserFragmentToSettingFragment()
+						findNavController().navigate(navigation)
+						true
+					}
+
+
+					else -> true
+				}
+			})
+
+			// [[ Editor Listener ]]
 			searchView.editText.setOnEditorActionListener { _, _, _ ->
 				searchBar.setText(searchView.text)
 				if (searchBar.text.length > 0) {
@@ -53,9 +79,15 @@ class SearchUserFragment : Fragment() {
 			activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object :
 				OnBackPressedCallback(true) {
 				override fun handleOnBackPressed() {
-					searchView.hide()
+					if (searchView.isShowing) {
+						searchView.hide()
+					} else {
+						this.remove()
+						activity?.onBackPressedDispatcher!!.onBackPressed()
+					}
 				}
-			})
+			}
+			)
 		}
 
 		// [[ ViewModel Observe ]]

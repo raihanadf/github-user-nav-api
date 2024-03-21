@@ -13,11 +13,20 @@
         <action
             android:id="@+id/action_searchUserFragment_to_detailUserFragment"
             app:destination="@id/detailUserFragment" />
+        <action
+            android:id="@+id/action_searchUserFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/detailUserFragment"
         android:name="com.raihan.githubapp.ui.fragment.detail_page.DetailUserFragment"
         android:label="fragment_detail_user"
         tools:layout="@layout/fragment_detail_user" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.raihan.githubapp.ui.fragment.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 
 </navigation>

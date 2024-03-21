@@ -5,4 +5,5 @@
     <string name="search_hint">Who\'s on your mind?</string>
     <string name="rv_username">Username</string>
     <string name="ic_favorite_label">Favorite</string>
+    <string name="setting_fragment_label">Implement Later</string>
 </resources>
