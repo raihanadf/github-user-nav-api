@@ -6,37 +6,42 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raihan.githubapp.data.model.UserItems
-import com.raihan.githubapp.data.model.Users
 import com.raihan.githubapp.data.network.ApiConfig
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class SearchViewModel : ViewModel() {
-    companion object {
-        const val TAG = "SearchVM"
-    }
+	companion object {
+		const val TAG = "SearchVM"
+	}
 
-    private var _searchedUsers = MutableLiveData<List<UserItems?>?>()
-    val searchedUsers: LiveData<List<UserItems?>?> get() = _searchedUsers
+	private var _searchedUsers = MutableLiveData<List<UserItems?>?>()
+	val searchedUsers: LiveData<List<UserItems?>?> get() = _searchedUsers
+	private var _isLoading = MutableLiveData(true)
+	val isLoading: LiveData<Boolean> = _isLoading
 
-    // [[ TODO: can be wrapped into one function, separation from specific and all is just using
-    // the name parameter ]]
-    fun getUser(name: String) {
-        viewModelScope.launch {
-            try {
-                val result = ApiConfig.getGithubService().searchUser(name)
-                _searchedUsers.value = result.items
-                Log.d(TAG, "getUser: ${result.items}")
-            } catch (e: HttpException) {
-                val response = (e as? HttpException)?.response()?.body()
-                Log.e(TAG, "Error fetching users: $e", e)
-                Log.d(TAG, "JSON Response: $response")
-            }
-        }
-    }
+	fun getUser(name: String? = null) {
+		_isLoading.value = true
+		viewModelScope.launch {
+			try {
+				var result: List<UserItems?>?
+				if (name != null) {
+					result = ApiConfig.getGithubService().searchUser(name).items
+				} else {
+					result = ApiConfig.getGithubService().getAllUsers()
+				}
+				_searchedUsers.value = result
+			} catch (e: HttpException) {
+				val response = (e as? HttpException)?.response()?.body()
+				Log.e(TAG, "Error fetching users: $e", e)
+				Log.d(TAG, "JSON Response: $response")
+			}
+			_isLoading.value = false
+		}
+	}
 
-    init {
-        getUser("raihanadf")
-    }
+	init {
+		getUser()
+	}
 
 }

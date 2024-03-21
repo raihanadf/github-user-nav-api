@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // [[ lifecycle: viewmodel ]]
     implementation(libs.androidx.navigation.fragment.ktx) // [[ navigation ]]
     implementation(libs.androidx.navigation.ui.ktx) // [[ navigation ]]
+    implementation(libs.circleimageview) // [[ circle image ]]
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

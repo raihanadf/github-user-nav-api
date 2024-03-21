@@ -5,5 +5,7 @@
         <item name="android:statusBarColor">?colorPrimary</item>
         <item name="android:windowLightStatusBar">true</item>
 
+        <item name="colorPrimary">#006876</item>
+
     </style>
 </resources>
