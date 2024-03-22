@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.raihan.githubapp.R
 import com.raihan.githubapp.databinding.FragmentDetailUserBinding
@@ -86,6 +87,15 @@ class DetailUserFragment : Fragment() {
 					pFirst.setProgressCompat(100, true)
 					pFirst.visibility = View.INVISIBLE
 				}
+			}
+
+			isError.observe(viewLifecycleOwner) {
+				if (it) {
+					Snackbar.make(requireView(), "Network Error!", Snackbar
+						.LENGTH_SHORT)
+						.show()
+				}
+
 			}
 
 		}

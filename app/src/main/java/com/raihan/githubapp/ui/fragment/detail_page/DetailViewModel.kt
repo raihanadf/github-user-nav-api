@@ -18,15 +18,19 @@ class DetailViewModel : ViewModel() {
 	val detailUser: LiveData<UserDetail> get() = _detailUser
 	private var _isLoading = MutableLiveData(true)
 	val isLoading: LiveData<Boolean> = _isLoading
+	private var _isError = MutableLiveData<Boolean>()
+	val isError: LiveData<Boolean> = _isError
 
 	fun getDetailUser(username: String) {
 		_isLoading.value = true
 		viewModelScope.launch {
+			_isError.value = false
 			try {
 				val user = ApiConfig.getGithubService().getUserDetail(username)
 				_detailUser.value = user
 			} catch (e: Exception) {
 				Log.d(TAG, "getDetailUser: ${e.message}")
+				_isError.value = true
 			}
 			_isLoading.value = false
 		}
