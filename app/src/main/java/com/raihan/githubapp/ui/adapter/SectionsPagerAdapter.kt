@@ -13,8 +13,8 @@ class SectionsPagerAdapter(fm: FragmentActivity, val username: String) :
 	}
 
 	override fun createFragment(position: Int): Fragment {
-		var fragment = FollowFragment()
-		fragment?.arguments = Bundle().apply {
+		val fragment = FollowFragment()
+		fragment.arguments = Bundle().apply {
 			putString("username", username)
 			putString(
 				FollowFragment.ARGS_TYPE,

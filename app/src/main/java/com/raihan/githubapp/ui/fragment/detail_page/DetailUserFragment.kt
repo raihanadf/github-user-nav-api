@@ -79,13 +79,12 @@ class DetailUserFragment : Fragment() {
 
 			// [[ Handle Linear Progress Bar ]]
 			isLoading.observe(viewLifecycleOwner) {
-				val pFirst = b.progressIndicator
 				if (it) {
-					pFirst.visibility = View.VISIBLE
-					pFirst.isIndeterminate = true
+					b.progressIndicator.visibility = View.VISIBLE
+					b.progressIndicator.isIndeterminate = true
 				} else {
-					pFirst.setProgressCompat(100, true)
-					pFirst.visibility = View.INVISIBLE
+					b.progressIndicator.setProgressCompat(100, true)
+					b.progressIndicator.visibility = View.INVISIBLE
 				}
 			}
 

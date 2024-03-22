@@ -28,7 +28,7 @@ class FollowFragment : Fragment() {
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		_b = FragmentFollowBinding.inflate(inflater, container, false)
 		return b.root
 	}
@@ -44,8 +44,6 @@ class FollowFragment : Fragment() {
 			FOLLOW_TYPE[1] -> {
 				followViewModel.getFollowing(username)
 			}
-
-			else -> false
 		}
 		followViewModel.apply {
 			userFollow.observe(viewLifecycleOwner) {

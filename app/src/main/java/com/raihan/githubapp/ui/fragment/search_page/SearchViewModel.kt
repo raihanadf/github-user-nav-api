@@ -28,11 +28,10 @@ class SearchViewModel : ViewModel() {
 		_isLoading.value = true
 		viewModelScope.launch {
 			try {
-				var result: List<UserItems?>?
-				if (name != null) {
-					result = ApiConfig.getGithubService().searchUser(name).items
+				val result: List<UserItems?>? = if (name != null) {
+					ApiConfig.getGithubService().searchUser(name).items
 				} else {
-					result = ApiConfig.getGithubService().getAllUsers()
+					ApiConfig.getGithubService().getAllUsers()
 				}
 				_searchedUsers.value = result
 				Log.d(TAG, "$result")
