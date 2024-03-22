@@ -5,5 +5,10 @@
     <string name="search_hint">Who\'s on your mind?</string>
     <string name="rv_username">Username</string>
     <string name="ic_favorite_label">Favorite</string>
-    <string name="setting_fragment_label">Implement Later</string>
+    <string name="setting_fragment_label">Implement Later, on Next
+        Submission</string>
+    <string name="detail_user_name">User Name</string>
+    <string name="detail_user_username">User Username</string>
+    <string name="detail_user_followers">0 Followers</string>
+    <string name="detail_user_following">0 Following</string>
 </resources>
