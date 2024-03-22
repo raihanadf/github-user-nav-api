@@ -17,14 +17,13 @@
             android:background="?colorPrimary"
             android:elevation="0dp"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="?colorOnPrimary" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:indeterminate="true
-"
+            android:indeterminate="true"
             app:hideAnimationBehavior="inward"
             app:showAnimationBehavior="inward" />
 

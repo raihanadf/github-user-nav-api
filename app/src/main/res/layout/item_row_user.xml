@@ -25,4 +25,16 @@
         app:layout_constraintStart_toEndOf="@id/image_avatar"
         app:layout_constraintTop_toTopOf="@id/image_avatar" />
 
+    <Button
+        android:id="@+id/button_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open"
+        style="@style/Widget.Material3.Button.Icon"
+        app:icon="@drawable/ic_open"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/image_avatar"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

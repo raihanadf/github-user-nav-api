@@ -52,15 +52,22 @@ class ListUserAdapter :
 				placeholder(R.drawable.ic_broken_image)
 			}
 			username.text = user.login.toString()
+			buttonOpen.setOnClickListener {
+				toDetailUser(holder, user)
+			}
 		}
 
 		// [[ OnClickListener to Detail ]]
 		holder.itemView.setOnClickListener {
-			val direction = SearchUserFragmentDirections.actionSearchUserFragmentToDetailUserFragment(
-				username = user.login.toString(),
-				userAvatar = user.avatarUrl.toString()
-			)
-			holder.itemView.findNavController().navigate(direction)
+			toDetailUser(holder, user)
 		}
+	}
+
+	private fun toDetailUser(holder: ViewHolder, user: UserItems) {
+		val direction = SearchUserFragmentDirections.actionSearchUserFragmentToDetailUserFragment(
+			username = user.login.toString(),
+			userAvatar = user.avatarUrl.toString()
+		)
+		holder.itemView.findNavController().navigate(direction)
 	}
 }
