@@ -7,10 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
+import com.google.android.material.tabs.TabLayoutMediator
 import com.raihan.githubapp.R
 import com.raihan.githubapp.databinding.FragmentDetailUserBinding
+import com.raihan.githubapp.ui.adapter.SectionsPagerAdapter
 
 class DetailUserFragment : Fragment() {
+	companion object {
+		private val TAB_TITLES = listOf(
+			"Followers",
+			"Followings"
+		)
+	}
 
 	private var _b: FragmentDetailUserBinding? = null
 	private val b get() = _b!!
@@ -59,6 +67,13 @@ class DetailUserFragment : Fragment() {
 						.followers, it.following
 				)
 
+				// [[ TabLayout and ViewPager2 ]]
+				val sectionsPagerAdapter =
+					SectionsPagerAdapter(requireActivity(), username)
+				b.viewPager.adapter = sectionsPagerAdapter
+				TabLayoutMediator(b.tabs, b.viewPager) { tab, position ->
+					tab.text = TAB_TITLES[position]
+				}.attach()
 			}
 
 			// [[ Handle Linear Progress Bar ]]

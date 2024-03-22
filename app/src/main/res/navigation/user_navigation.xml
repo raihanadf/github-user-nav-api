@@ -9,7 +9,7 @@
         android:id="@+id/searchUserFragment"
         android:name="com.raihan.githubapp.ui.fragment.search_page.SearchUserFragment"
         android:label="fragment_search_user"
-        tools:layout="@layout/fragment_search_user" >
+        tools:layout="@layout/fragment_search_user">
         <action
             android:id="@+id/action_searchUserFragment_to_detailUserFragment"
             app:destination="@id/detailUserFragment"
@@ -37,11 +37,12 @@
         android:id="@+id/detailUserFragment"
         android:name="com.raihan.githubapp.ui.fragment.detail_page.DetailUserFragment"
         android:label="fragment_detail_user"
-        tools:layout="@layout/fragment_detail_user" >
+        tools:layout="@layout/fragment_detail_user">
         <argument
             android:name="username"
             app:argType="string" />
-        <argument android:name="user_avatar"
+        <argument
+            android:name="user_avatar"
             app:argType="string" />
     </fragment>
     <fragment
@@ -49,5 +50,12 @@
         android:name="com.raihan.githubapp.ui.fragment.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
+    <action
+        android:id="@+id/action_global_detailUserFragment"
+        app:destination="@id/detailUserFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
 </navigation>

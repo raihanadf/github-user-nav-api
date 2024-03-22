@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raihan.githubapp.R
+import com.raihan.githubapp.UserNavigationDirections
 import com.raihan.githubapp.data.model.UserItems
 import com.raihan.githubapp.databinding.ItemRowUserBinding
-import com.raihan.githubapp.ui.fragment.search_page.SearchUserFragmentDirections
 
 class ListUserAdapter :
 	ListAdapter<UserItems, ListUserAdapter.ViewHolder>(DIFF_CALLBACK) {
@@ -64,7 +64,7 @@ class ListUserAdapter :
 	}
 
 	private fun toDetailUser(holder: ViewHolder, user: UserItems) {
-		val direction = SearchUserFragmentDirections.actionSearchUserFragmentToDetailUserFragment(
+		val direction = UserNavigationDirections.actionGlobalDetailUserFragment(
 			username = user.login.toString(),
 			userAvatar = user.avatarUrl.toString()
 		)

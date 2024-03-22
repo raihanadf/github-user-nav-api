@@ -11,8 +11,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class ApiConfig {
 	companion object {
-		const val TOKEN = BuildConfig.API_KEY
-		const val BASE_URL = BuildConfig.API_URL
+		private const val TOKEN = BuildConfig.API_KEY
+		private const val BASE_URL = BuildConfig.API_URL
 		fun getGithubService(): ApiGithubService {
 			val authInterceptor = Interceptor { chain ->
 				val req = chain.request()
