@@ -19,8 +19,12 @@ class SearchViewModel : ViewModel() {
 	val searchedUsers: LiveData<List<UserItems?>?> get() = _searchedUsers
 	private var _isLoading = MutableLiveData(true)
 	val isLoading: LiveData<Boolean> = _isLoading
+	private var _isError = MutableLiveData(false)
+	val isError: LiveData<Boolean> = _isError
+
 
 	fun getUser(name: String? = null) {
+		_isError.value = false
 		_isLoading.value = true
 		viewModelScope.launch {
 			try {
@@ -31,10 +35,12 @@ class SearchViewModel : ViewModel() {
 					result = ApiConfig.getGithubService().getAllUsers()
 				}
 				_searchedUsers.value = result
-			} catch (e: HttpException) {
+				Log.d(TAG, "$result")
+			} catch (e: Exception) {
 				val response = (e as? HttpException)?.response()?.body()
 				Log.e(TAG, "Error fetching users: $e", e)
 				Log.d(TAG, "JSON Response: $response")
+				_isError.value = true
 			}
 			_isLoading.value = false
 		}

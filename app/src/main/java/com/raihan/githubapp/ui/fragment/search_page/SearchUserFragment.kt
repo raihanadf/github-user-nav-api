@@ -17,9 +17,6 @@ import com.raihan.githubapp.databinding.FragmentSearchUserBinding
 import com.raihan.githubapp.ui.adapter.ListUserAdapter
 
 class SearchUserFragment : Fragment() {
-	companion object {
-		const val TAG = "MainActivity"
-	}
 
 	private var _b: FragmentSearchUserBinding? = null
 	private val b get() = _b!!
@@ -40,7 +37,7 @@ class SearchUserFragment : Fragment() {
 			// [[ Search bar and view thingy ]]
 			searchBar.inflateMenu(R.menu.menu_action)
 			searchView.setupWithSearchBar(searchBar)
-			searchBar.setOnMenuItemClickListener({ item ->
+			searchBar.setOnMenuItemClickListener { item ->
 				when (item.itemId) {
 
 					R.id.action_favorite -> {
@@ -58,15 +55,17 @@ class SearchUserFragment : Fragment() {
 						true
 					}
 
-
 					else -> true
 				}
-			})
+			}
+
+			// [[ Handle back button on Search View ]]
+			handleBackButton()
 
 			// [[ Editor Listener ]]
 			searchView.editText.setOnEditorActionListener { _, _, _ ->
 				searchBar.setText(searchView.text)
-				if (searchBar.text.length > 0) {
+				if (searchBar.text.isNotEmpty()) {
 					searchViewModel.getUser(searchBar.text.toString())
 				} else {
 					searchViewModel.getUser()
@@ -74,20 +73,6 @@ class SearchUserFragment : Fragment() {
 				searchView.hide()
 				false
 			}
-
-			// [[ Handle back button on Search View ]]
-			activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object :
-				OnBackPressedCallback(true) {
-				override fun handleOnBackPressed() {
-					if (searchView.isShowing) {
-						searchView.hide()
-					} else {
-						this.remove()
-						activity?.onBackPressedDispatcher!!.onBackPressed()
-					}
-				}
-			}
-			)
 		}
 
 		// [[ ViewModel Observe ]]
@@ -96,19 +81,50 @@ class SearchUserFragment : Fragment() {
 			searchedUsers.observe(viewLifecycleOwner) {
 				setUsersList(it)
 			}
+			// [[ Observe: Is it error? ]]
+			isError.observe(viewLifecycleOwner) {
+				errorView(it)
+			}
 			// [[ Observe: Is it loading? ]]
 			isLoading.observe(viewLifecycleOwner) {
-				val pFirst = b.progressIndicator
-				if (it) {
-					pFirst.visibility = View.VISIBLE
-					pFirst.isIndeterminate = true
+				loadingView(it)
+			}
+		}
+	}
+
+	private fun errorView(isError: Boolean?) {
+		if (isError!!) {
+			b.networkError.visibility = View.VISIBLE
+			b.rvUsers.visibility = View.INVISIBLE
+		} else {
+			b.networkError.visibility = View.INVISIBLE
+			b.rvUsers.visibility = View.VISIBLE
+		}
+	}
+
+	private fun loadingView(isLoading: Boolean?) {
+		if (isLoading!!) {
+			b.progressIndicator.visibility = View.VISIBLE
+			b.progressIndicator.isIndeterminate = true
+		} else {
+			b.progressIndicator.setProgressCompat(100, true)
+			b.progressIndicator.visibility = View.INVISIBLE
+		}
+	}
+
+	private fun handleBackButton() {
+		activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object :
+			OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				if (b.searchView.isShowing) {
+					b.searchView.hide()
 				} else {
-					pFirst.setProgressCompat(100, true)
-					pFirst.visibility = View.INVISIBLE
+					this.remove()
+					activity?.onBackPressedDispatcher?.onBackPressed()
 				}
 			}
 		}
-
+		)
 	}
 
 	private fun setUsersList(users: List<UserItems?>?) {

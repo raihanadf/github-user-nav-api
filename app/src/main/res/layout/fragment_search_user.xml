@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.search_page.SearchUserFragment">
 
+    <ImageView
+        android:id="@+id/network_error"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:src="@drawable/ic_connection_error"
+        />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
