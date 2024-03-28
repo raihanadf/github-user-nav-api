@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,6 +32,8 @@ class SearchUserFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
+		setUsersList()
+
 		with(b) {
 			// [[ Search bar and view thingy ]]
 			searchBar.inflateMenu(R.menu.menu_action)
@@ -41,10 +42,9 @@ class SearchUserFragment : Fragment() {
 				when (item.itemId) {
 
 					R.id.action_favorite -> {
-						Toast.makeText(
-							requireActivity(), "Not Implemented Yet", Toast
-								.LENGTH_SHORT
-						).show()
+						val navigation =
+							SearchUserFragmentDirections.actionSearchUserFragmentToFavoriteFragment()
+						findNavController().navigate(navigation)
 						true
 					}
 
@@ -127,11 +127,15 @@ class SearchUserFragment : Fragment() {
 		)
 	}
 
-	private fun setUsersList(users: List<UserItems?>?) {
+	private fun setUsersList(users: List<UserItems?>? = null) {
 		// [[ Initialize list user adapter ]]
 		val adapter = ListUserAdapter()
 		val layoutManager = LinearLayoutManager(requireContext())
-		adapter.submitList(users)
+
+		if (users != null) {
+			adapter.submitList(users)
+		}
+
 		b.rvUsers.adapter = adapter
 		b.rvUsers.layoutManager = layoutManager
 		b.rvUsers.addItemDecoration(

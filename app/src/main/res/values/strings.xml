@@ -7,4 +7,10 @@
     <string name="setting_fragment_label">Implement Later, on Next
         Submission</string>
     <string name="followers">%1$d Followers</string>
+    <string name="followings">%1$d Followings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite_button">Favorite Button</string>
+    <string name="favorite_page">Favorite</string>
+    <string name="setting_page">Setting</string>
 </resources>

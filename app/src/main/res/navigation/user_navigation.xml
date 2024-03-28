@@ -32,6 +32,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_searchUserFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailUserFragment"
@@ -47,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.raihan.githubapp.ui.fragment.SettingFragment"
+        android:name="com.raihan.githubapp.ui.fragment.setting_page.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <action
@@ -57,5 +64,10 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.raihan.githubapp.ui.fragment.favorite_page.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 
 </navigation>

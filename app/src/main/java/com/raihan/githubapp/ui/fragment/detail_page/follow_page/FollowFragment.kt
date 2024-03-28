@@ -35,6 +35,9 @@ class FollowFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		setUsersList()
+
 		val username = arguments?.getString("username", "").toString()
 		when (arguments?.getString(ARGS_TYPE)) {
 			FOLLOW_TYPE[0] -> {
@@ -65,11 +68,15 @@ class FollowFragment : Fragment() {
 		}
 	}
 
-	private fun setUsersList(users: List<UserItems?>?) {
+	private fun setUsersList(users: List<UserItems?>? = null) {
 		// [[ Initialize list user adapter ]]
 		val adapter = ListUserAdapter()
 		val layoutManager = LinearLayoutManager(requireContext())
-		adapter.submitList(users)
+
+		if (users != null) {
+			adapter.submitList(users)
+		}
+
 		b.rvUsers.adapter = adapter
 		b.rvUsers.layoutManager = layoutManager
 		b.rvUsers.addItemDecoration(

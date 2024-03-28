@@ -2,6 +2,8 @@ plugins {
 	alias(libs.plugins.androidApplication)
 	alias(libs.plugins.jetbrainsKotlinAndroid)
 	id("androidx.navigation.safeargs.kotlin")
+	id("com.google.devtools.ksp")
+	id("kotlin-parcelize")
 }
 
 android {
@@ -26,11 +28,12 @@ android {
 	buildTypes {
 		debug {
 			buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
-			buildConfigField("String", "API_KEY", "\"\"")
+			buildConfigField("String", "API_KEY", "")
 		}
 		release {
 			buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
-			buildConfigField( "String", "API_KEY", "\"\"" )
+			buildConfigField("String", "API_KEY",
+				"")
 			isMinifyEnabled = false
 			proguardFiles(
 				getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -60,6 +63,10 @@ dependencies {
 	implementation(libs.androidx.viewpager2) // [[ viewpager ]]
 	implementation(libs.androidx.core.splashscreen) // [[ splash screen ]]
 	implementation(libs.circleimageview) // [[ circle image ]]
+
+	// database
+	implementation(libs.androidx.room.ktx)
+	ksp(libs.androidx.room.compiler)
 
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
