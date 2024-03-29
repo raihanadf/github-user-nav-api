@@ -1,6 +1,7 @@
 package com.raihan.githubapp.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -9,11 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raihan.githubapp.R
 import com.raihan.githubapp.UserNavigationDirections
+import com.raihan.githubapp.data.local.entity.UserFavoriteEntity
 import com.raihan.githubapp.data.model.UserItems
 import com.raihan.githubapp.databinding.ItemRowUserBinding
 
-class ListUserAdapter :
+class ListUserAdapter(
+	val isFavoriteList: Boolean, private val onFavoriteClick:
+		(UserFavoriteEntity) -> Unit = {}
+) :
 	ListAdapter<UserItems, ListUserAdapter.ViewHolder>(DIFF_CALLBACK) {
+
 	companion object {
 		val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UserItems>() {
 			override fun areItemsTheSame(
@@ -45,22 +51,31 @@ class ListUserAdapter :
 	}
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+		// [[ Use this variable to not make another adapter for favorite ]]
+		if (isFavoriteList) {
+			holder.binding.buttonOpen.visibility = View.GONE
+		} else {
+			holder.binding.buttonOpenFav.visibility = View.GONE
+			holder.binding.buttonUnfav.visibility = View.GONE
+		}
+
 		val user = getItem(position)
 		holder.binding.apply {
 			imageAvatar.load(user.avatarUrl) {
 				placeholder(R.drawable.loading)
-				placeholder(R.drawable.ic_broken_image)
+				error(R.drawable.ic_broken_image)
 			}
 			username.text = user.login.toString()
-			buttonOpen.setOnClickListener {
-				toDetailUser(holder, user)
-			}
+			buttonOpen.setOnClickListener { toDetailUser(holder, user) }
+			buttonOpenFav.setOnClickListener { toDetailUser(holder, user) }
 		}
 
+		// [[ UserItems to UserFavEntity, and then assign the button ofc ]]
+		val userFav = UserFavoriteEntity(user.login.toString(), user.avatarUrl)
+		holder.binding.buttonUnfav.setOnClickListener { onFavoriteClick(userFav) }
+
 		// [[ OnClickListener to Detail ]]
-		holder.itemView.setOnClickListener {
-			toDetailUser(holder, user)
-		}
+		holder.itemView.setOnClickListener { toDetailUser(holder, user) }
 	}
 
 	private fun toDetailUser(holder: ViewHolder, user: UserItems) {

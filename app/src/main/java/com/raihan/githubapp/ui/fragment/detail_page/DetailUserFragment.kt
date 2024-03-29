@@ -28,7 +28,8 @@ class DetailUserFragment : Fragment() {
 	private val b get() = _b!!
 
 	private lateinit var detailViewModel: DetailViewModel
-	private lateinit var currentUser: UserFavoriteEntity
+	private lateinit var username: String
+	private lateinit var avatar: String
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,8 +46,19 @@ class DetailUserFragment : Fragment() {
 
 		// [[ Take arguments from the bundle/safeargs ]]
 		val args = DetailUserFragmentArgs.fromBundle(arguments as Bundle)
-		val username = args.username
-		val avatar = args.userAvatar
+		username = args.username
+		avatar = args.userAvatar
+
+		// [[ -------- Viewmodel Apply to UI -------- ]]
+		viewModelApply(detailViewModel, b)
+		handleFavorite(detailViewModel, b)
+	}
+
+	private fun viewModelApply(
+		detailViewModel: DetailViewModel,
+		b: FragmentDetailUserBinding
+	) {
+
 		b.userAvatar.load(avatar) {
 			placeholder(R.drawable.loading)
 			error(R.drawable.ic_broken_image)
@@ -60,36 +72,11 @@ class DetailUserFragment : Fragment() {
 			title = username
 		}
 
-		// [[ -------- Viewmodel -------- ]]
+
 		detailViewModel.apply {
 
 			// [[ -------- Get user detail -------- ]]
 			getDetailUser(username)
-			getFavorite(username).observe(viewLifecycleOwner) { username ->
-
-				// [[ Use args so it wouldn't crash when details aren't loaded yet ]]
-				currentUser = UserFavoriteEntity(args.username, args.userAvatar)
-
-				b.floatingActionButton.setOnClickListener {
-					toggleFavorite(currentUser, username != null)
-				}
-
-				if (username == null) {
-					b.floatingActionButton.setImageDrawable(
-						ContextCompat.getDrawable(
-							requireContext(),
-							R.drawable.ic_favorite
-						)
-					)
-				} else {
-					b.floatingActionButton.setImageDrawable(
-						ContextCompat.getDrawable(
-							requireContext(),
-							R.drawable.ic_favorite_filled
-						)
-					)
-				}
-			}
 
 			// [[ -------- Observe the details to UI -------- ]]
 			detailUser.observe(viewLifecycleOwner) {
@@ -129,20 +116,40 @@ class DetailUserFragment : Fragment() {
 						requireView(), "Network Error!", Snackbar.LENGTH_SHORT
 					).show()
 				}
-
 			}
-
 		}
 	}
 
-
-	fun applyViewModelAndBindings(
-		v: DetailViewModel, b:
-		FragmentDetailUserBinding
+	private fun handleFavorite(
+		detailViewModel: DetailViewModel,
+		b: FragmentDetailUserBinding
 	) {
+		detailViewModel.apply {
+			val currentUser = UserFavoriteEntity(username, avatar)
 
+			getFavorite(username).observe(viewLifecycleOwner) { username ->
+				b.floatingActionButton.setOnClickListener {
+					toggleFavorite(currentUser, username != null)
+				}
+
+				if (username == null) {
+					b.floatingActionButton.setImageDrawable(
+						ContextCompat.getDrawable(
+							requireContext(),
+							R.drawable.ic_favorite
+						)
+					)
+				} else {
+					b.floatingActionButton.setImageDrawable(
+						ContextCompat.getDrawable(
+							requireContext(),
+							R.drawable.ic_favorite_filled
+						)
+					)
+				}
+			}
+		}
 	}
-
 
 	private fun obtainViewModel(activity: FragmentActivity): DetailViewModel {
 		val factory = ViewModelFactory.getInstance(activity.application)

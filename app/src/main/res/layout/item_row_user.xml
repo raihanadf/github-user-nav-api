@@ -27,14 +27,33 @@
 
     <Button
         android:id="@+id/button_open"
+        style="@style/Widget.Material3.Button.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Open"
-        style="@style/Widget.Material3.Button.Icon"
         app:icon="@drawable/ic_open"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/image_avatar"
         app:layout_constraintBottom_toBottomOf="@id/image_avatar"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_avatar" />
+
+    <Button
+        android:id="@+id/button_open_fav"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_open"
+        app:layout_constraintBottom_toBottomOf="@id/image_avatar"
+        app:layout_constraintEnd_toStartOf="@id/button_unfav"
+        app:layout_constraintTop_toTopOf="@id/image_avatar" />
+
+    <Button
+        android:id="@+id/button_unfav"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_favorite_filled"
+        app:layout_constraintBottom_toBottomOf="@id/image_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_avatar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

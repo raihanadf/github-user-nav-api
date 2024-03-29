@@ -70,7 +70,7 @@ class FollowFragment : Fragment() {
 
 	private fun setUsersList(users: List<UserItems?>? = null) {
 		// [[ Initialize list user adapter ]]
-		val adapter = ListUserAdapter()
+		val adapter = ListUserAdapter(false)
 		val layoutManager = LinearLayoutManager(requireContext())
 
 		if (users != null) {

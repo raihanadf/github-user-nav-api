@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,6 +32,9 @@ class SearchUserFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// [[ Post-pone animation biar gak ngelag ]]
+		postponeEnterTransition()
 
 		setUsersList()
 
@@ -129,7 +133,7 @@ class SearchUserFragment : Fragment() {
 
 	private fun setUsersList(users: List<UserItems?>? = null) {
 		// [[ Initialize list user adapter ]]
-		val adapter = ListUserAdapter()
+		val adapter = ListUserAdapter(false)
 		val layoutManager = LinearLayoutManager(requireContext())
 
 		if (users != null) {
@@ -143,6 +147,14 @@ class SearchUserFragment : Fragment() {
 				requireContext(), layoutManager.orientation
 			)
 		)
+
+		// [[ On Android docs, post-pone animation wait ]]
+		(view?.parent as? ViewGroup)?.doOnPreDraw {
+			startPostponedEnterTransition()
+		}
+
+		b.rvUsers.setHasFixedSize(true)
+		b.rvUsers.isNestedScrollingEnabled = true
 	}
 
 	override fun onDestroy() {

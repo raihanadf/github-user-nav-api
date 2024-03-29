@@ -24,16 +24,17 @@ class SearchViewModel : ViewModel() {
 
 
 	fun getUser(name: String? = null) {
-		_isError.value = false
-		_isLoading.value = true
 		viewModelScope.launch {
 			try {
+				_isError.value = false
+				_isLoading.value = true
 				val result: List<UserItems?>? = if (name != null) {
 					ApiConfig.getGithubService().searchUser(name).items
 				} else {
 					ApiConfig.getGithubService().getAllUsers()
 				}
 				_searchedUsers.value = result
+				_isLoading.value = false
 				Log.d(TAG, "$result")
 			} catch (e: Exception) {
 				val response = (e as? HttpException)?.response()?.body()
@@ -41,7 +42,6 @@ class SearchViewModel : ViewModel() {
 				Log.d(TAG, "JSON Response: $response")
 				_isError.value = true
 			}
-			_isLoading.value = false
 		}
 	}
 
