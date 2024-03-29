@@ -12,7 +12,7 @@ import coil.load
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.raihan.githubapp.R
-import com.raihan.githubapp.data.local.ViewModelFactory
+import com.raihan.githubapp.data.factory.ViewModelFactory
 import com.raihan.githubapp.data.local.entity.UserFavoriteEntity
 import com.raihan.githubapp.databinding.FragmentDetailUserBinding
 import com.raihan.githubapp.ui.adapter.SectionsPagerAdapter
@@ -152,7 +152,7 @@ class DetailUserFragment : Fragment() {
 	}
 
 	private fun obtainViewModel(activity: FragmentActivity): DetailViewModel {
-		val factory = ViewModelFactory.getInstance(activity.application)
+		val factory = ViewModelFactory.getAppInstance(activity.application)
 		return ViewModelProvider(activity, factory)[DetailViewModel::class.java]
 	}
 }

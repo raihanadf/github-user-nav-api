@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.raihan.githubapp.data.local.ViewModelFactory
+import com.raihan.githubapp.data.factory.ViewModelFactory
 import com.raihan.githubapp.data.model.UserItems
 import com.raihan.githubapp.databinding.FragmentFavoriteBinding
 import com.raihan.githubapp.ui.adapter.ListUserAdapter
@@ -92,7 +92,7 @@ class FavoriteFragment : Fragment() {
 	}
 
 	private fun obtainViewModel(activity: FragmentActivity): FavoriteViewModel {
-		val factory = ViewModelFactory.getInstance(activity.application)
+		val factory = ViewModelFactory.getAppInstance(activity.application)
 		return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
 	}
 }

@@ -1,4 +1,4 @@
-package com.raihan.githubapp.data.local
+package com.raihan.githubapp.data.factory
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -16,7 +16,7 @@ class ViewModelFactory private constructor(
 		private var INSTANCE: ViewModelFactory? = null
 
 		@JvmStatic
-		fun getInstance(application: Application): ViewModelFactory {
+		fun getAppInstance(application: Application): ViewModelFactory {
 			if (INSTANCE == null) {
 				synchronized(ViewModelFactory::class.java) {
 					INSTANCE = ViewModelFactory(application)
