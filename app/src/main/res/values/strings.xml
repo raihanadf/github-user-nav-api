@@ -13,4 +13,6 @@
     <string name="favorite_button">Favorite Button</string>
     <string name="favorite_page">Favorite</string>
     <string name="setting_page">Setting</string>
+    <string name="placeholder_appearance">Appearance</string>
+    <string name="theme_appearance">Theme</string>
 </resources>
