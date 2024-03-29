@@ -16,19 +16,15 @@ class UserFavoriteRepository(application: Application) {
 
 	fun getAllFavUser(): LiveData<List<UserFavoriteEntity>> = mFavDao.getAllUser()
 
-	fun isFavorite(username: String): LiveData<UserFavoriteEntity> =
+	fun getFavorite(username: String): LiveData<UserFavoriteEntity> =
 		mFavDao.getFavoriteByUsername(username)
 
 
-	fun insert(user: UserFavoriteEntity) {
+	suspend fun insert(user: UserFavoriteEntity) {
 		mFavDao.insert(user)
 	}
 
-	fun delete(user: UserFavoriteEntity) {
+	suspend fun delete(user: UserFavoriteEntity) {
 		mFavDao.delete(user)
-	}
-
-	fun update(user: UserFavoriteEntity) {
-		mFavDao.update(user)
 	}
 }

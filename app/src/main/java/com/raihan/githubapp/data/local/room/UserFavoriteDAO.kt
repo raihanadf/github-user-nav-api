@@ -12,13 +12,10 @@ import com.raihan.githubapp.data.local.entity.UserFavoriteEntity
 @Dao
 interface UserFavoriteDAO {
 	@Insert(onConflict = OnConflictStrategy.IGNORE)
-	fun insert(user: UserFavoriteEntity)
-
-	@Update
-	fun update(user: UserFavoriteEntity)
+	suspend fun insert(user: UserFavoriteEntity)
 
 	@Delete
-	fun delete(user: UserFavoriteEntity)
+	suspend fun delete(user: UserFavoriteEntity)
 
 	@Query("select * from user_favorite")
 	fun getAllUser(): LiveData<List<UserFavoriteEntity>>

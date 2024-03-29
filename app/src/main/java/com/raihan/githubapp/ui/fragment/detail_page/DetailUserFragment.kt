@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.raihan.githubapp.R
 import com.raihan.githubapp.data.local.ViewModelFactory
+import com.raihan.githubapp.data.local.entity.UserFavoriteEntity
 import com.raihan.githubapp.databinding.FragmentDetailUserBinding
 import com.raihan.githubapp.ui.adapter.SectionsPagerAdapter
 
@@ -24,8 +25,10 @@ class DetailUserFragment : Fragment() {
 	}
 
 	private var _b: FragmentDetailUserBinding? = null
-	private lateinit var detailViewModel: DetailViewModel
 	private val b get() = _b!!
+
+	private lateinit var detailViewModel: DetailViewModel
+	private lateinit var currentUser: UserFavoriteEntity
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -62,24 +65,32 @@ class DetailUserFragment : Fragment() {
 
 			// [[ -------- Get user detail -------- ]]
 			getDetailUser(username)
-			isFavorite(username).observe(viewLifecycleOwner) {
-				if (it == null) {
+			getFavorite(username).observe(viewLifecycleOwner) { username ->
+
+				// [[ Use args so it wouldn't crash when details aren't loaded yet ]]
+				currentUser = UserFavoriteEntity(args.username, args.userAvatar)
+
+				b.floatingActionButton.setOnClickListener {
+					toggleFavorite(currentUser, username != null)
+				}
+
+				if (username == null) {
 					b.floatingActionButton.setImageDrawable(
 						ContextCompat.getDrawable(
-							requireContext(), R.drawable
-								.ic_favorite
+							requireContext(),
+							R.drawable.ic_favorite
 						)
 					)
 				} else {
 					b.floatingActionButton.setImageDrawable(
 						ContextCompat.getDrawable(
-							requireContext(), R.drawable
-								.ic_favorite_filled
+							requireContext(),
+							R.drawable.ic_favorite_filled
 						)
 					)
 				}
-
 			}
+
 			// [[ -------- Observe the details to UI -------- ]]
 			detailUser.observe(viewLifecycleOwner) {
 				b.userName.text =

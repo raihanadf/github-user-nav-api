@@ -39,13 +39,18 @@ class DetailViewModel(application: Application) : ViewModel() {
 		}
 	}
 
-	fun addUserToFavorite(user: UserDetail) {
-
+	fun toggleFavorite(user: UserFavoriteEntity, isFavorite: Boolean) {
+		viewModelScope.launch {
+			if (!isFavorite) {
+				mFavoriteRepository.insert(user)
+			} else {
+				mFavoriteRepository.delete(user)
+			}
+		}
 	}
 
-	fun isFavorite(username: String): LiveData<UserFavoriteEntity> =
-		mFavoriteRepository.isFavorite(username)
-
+	fun getFavorite(username: String): LiveData<UserFavoriteEntity> =
+		mFavoriteRepository.getFavorite(username)
 
 	companion object {
 		const val TAG = "DetailVM"
