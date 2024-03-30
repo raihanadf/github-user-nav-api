@@ -2,7 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="SearchUserFragmentTest">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="searchUsername()">
+        <State />
+      </entry>
+      <entry key="toDetails()">
+        <State />
+      </entry>
+      <entry key="toggleFavorite()">
         <State />
       </entry>
     </value>

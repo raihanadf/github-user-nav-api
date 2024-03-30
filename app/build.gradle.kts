@@ -28,12 +28,18 @@ android {
 	buildTypes {
 		debug {
 			buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
-			buildConfigField("String", "API_KEY", "")
+			buildConfigField(
+				"String",
+				"API_KEY",
+				"\"\""
+			)
 		}
 		release {
 			buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
-			buildConfigField("String", "API_KEY",
-				"")
+			buildConfigField(
+				"String", "API_KEY",
+				"\"\""
+			)
 			isMinifyEnabled = false
 			proguardFiles(
 				getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -66,6 +72,7 @@ dependencies {
 
 	// database
 	implementation(libs.androidx.room.ktx)
+	implementation(libs.core.ktx)
 	ksp(libs.androidx.room.compiler)
 
 	// datastore
@@ -78,7 +85,17 @@ dependencies {
 	implementation(libs.material)
 	implementation(libs.androidx.activity)
 	implementation(libs.androidx.constraintlayout)
+
+	// testing additional
+	implementation(libs.androidx.espresso.contrib)
+	implementation(libs.androidx.fragment.testing)
+
+	// junit and mockito
 	testImplementation(libs.junit)
+
+	// espresso
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
+	androidTestImplementation(libs.androidx.runner)
+	androidTestImplementation(libs.androidx.rules)
 }

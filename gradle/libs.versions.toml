@@ -4,8 +4,11 @@ circleimageview = "3.1.0"
 coil = "2.3.0"
 converterMoshi = "2.4.0"
 coreSplashscreen = "1.0.0-beta02"
+coreTesting = "1.1.1"
+coreTestingVersion = "2.0.1"
 datastorePreferences = "1.0.0"
 fragmentKtx = "1.6.2"
+junitJupiter = "5.8.1"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -14,10 +17,14 @@ espressoCore = "3.5.1"
 appcompat = "1.6.1"
 kotlinxCoroutinesAndroid = "1.5.2"
 kotlinxCoroutinesCore = "1.5.2"
+kotlinxCoroutinesTest = "1.7.3"
+lifecycleExtensions = "2.0.0'"
 lifecycleLivedataKtx = "2.7.0"
 material = "1.11.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+mockitoInline = "4.4.0"
+mockitoCore = "4.4.0"
 moshiKotlin = "1.14.0"
 moshiVersion = "1.12.0"
 navigationSafeArgsGradlePlugin = "2.7.7"
@@ -25,13 +32,21 @@ navigationUiKtx = "2.7.7"
 navigationFragmentKtx = "2.7.7"
 okhttp = "5.0.0-beta.2"
 retrofit = "2.10.0"
+robolectric = "4.7.3"
 roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
+rules = "1.5.0"
+runner = "1.5.2"
 viewpager2 = "1.0.0"
+coreKtxVersion = "1.5.0"
+junitKtx = "1.1.5"
+fragmentTesting = "1.6.2"
+espressoContrib = "3.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTestingVersion" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
@@ -41,24 +56,37 @@ androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fr
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomCompiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-rules = { module = "androidx.test:rules", version.ref = "rules" }
+androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
+core-testing = { module = "android.arch.core:core-testing", version.ref = "coreTesting" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junitJupiter" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+lifecycle-extensions = { module = "implementation 'androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 squareup-moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshiVersion" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-fragment-testing = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmentTesting" }
+androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

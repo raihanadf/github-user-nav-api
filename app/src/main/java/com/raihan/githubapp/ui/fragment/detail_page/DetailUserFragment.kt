@@ -54,6 +54,13 @@ class DetailUserFragment : Fragment() {
 		handleFavorite(detailViewModel, b)
 	}
 
+	private fun showUser(invisible: Int) {
+		b.userName.visibility = invisible
+		b.userUsername.visibility = invisible
+		b.userFollowers.visibility = invisible
+		b.userFollowing.visibility = invisible
+	}
+
 	private fun viewModelApply(
 		detailViewModel: DetailViewModel,
 		b: FragmentDetailUserBinding
@@ -102,9 +109,11 @@ class DetailUserFragment : Fragment() {
 			// [[ Handle Linear Progress Bar ]]
 			isLoading.observe(viewLifecycleOwner) {
 				if (it) {
+					showUser(View.INVISIBLE)
 					b.progressIndicator.visibility = View.VISIBLE
 					b.progressIndicator.isIndeterminate = true
 				} else {
+					showUser(View.VISIBLE)
 					b.progressIndicator.setProgressCompat(100, true)
 					b.progressIndicator.visibility = View.INVISIBLE
 				}

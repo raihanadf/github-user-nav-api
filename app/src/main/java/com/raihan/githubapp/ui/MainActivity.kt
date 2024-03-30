@@ -1,4 +1,4 @@
-package com.raihan.githubapp
+package com.raihan.githubapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

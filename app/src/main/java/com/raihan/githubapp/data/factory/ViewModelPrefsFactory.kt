@@ -2,8 +2,8 @@ package com.raihan.githubapp.data.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.raihan.githubapp.MainViewModel
 import com.raihan.githubapp.data.local.preference.SettingPreferences
+import com.raihan.githubapp.ui.MainViewModel
 import com.raihan.githubapp.ui.fragment.setting_page.SettingViewModel
 
 class ViewModelPrefsFactory(private val pref: SettingPreferences) :
