@@ -33,7 +33,7 @@ class FavoriteFragment : Fragment() {
 		// [[ Obtain ViewModel ]]
 		favoriteViewModel = obtainViewModel(requireActivity())
 
-		setUsersList()
+		setUsersList(b = b)
 
 		// [[ Handle onBackPressed on top bar ]]
 		b.topBar.apply {
@@ -44,14 +44,13 @@ class FavoriteFragment : Fragment() {
 
 		// [[ ----- Viewmodel apply to UI ----- ]]
 		favoriteViewModel.apply {
-			getAllFavorites().observe(viewLifecycleOwner) {
-					users ->
+			getAllFavorites().observe(viewLifecycleOwner) { users ->
 				val items = arrayListOf<UserItems>()
 				users.map {
 					val item = UserItems(it.username, it.avatarUrl)
 					items.add(item)
 				}
-				setUsersList(items)
+				setUsersList(items, b)
 			}
 
 			isLoading.observe(viewLifecycleOwner) {
@@ -70,7 +69,10 @@ class FavoriteFragment : Fragment() {
 		}
 	}
 
-	private fun setUsersList(users: List<UserItems?>? = null) {
+	private fun setUsersList(
+		users: List<UserItems?>? = null,
+		b: FragmentFavoriteBinding
+	) {
 		// [[ Initialize list user adapter ]]
 		val adapter = ListUserAdapter(true) {
 			// [[ Set this to true, cause these are already a favorite duh ]]
@@ -78,7 +80,11 @@ class FavoriteFragment : Fragment() {
 		}
 		val layoutManager = LinearLayoutManager(requireContext())
 
-		if (users != null) {
+		// [[ Show text thingy if null ]]
+		b.txtNoFav.visibility = View.VISIBLE
+
+		if (!users.isNullOrEmpty()) {
+			b.txtNoFav.visibility = View.GONE
 			adapter.submitList(users)
 		}
 
